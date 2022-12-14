@@ -14,12 +14,13 @@
  *    If so, the ball reverses the move direction.
  */
 
-const BOX_WIDTH  = 200;  // textbox dimensions
+const BOX_WIDTH  = 300;  // textbox dimensions
 const BOX_HEIGHT = 100;
 
 var balls = [];
 var sound;
 var testBall;
+var colorNum;
 
 function preload() {
 
@@ -31,8 +32,6 @@ function setup() {
 //  createCanvas(windowWidth, windowHeight);
   createCanvas(600,400)
 
-  
-  noStroke();
   
   //sound.play();    // play the audio file once
   sound.loop();  // play the sound file repeatedly
@@ -46,7 +45,7 @@ function setup() {
   testBall.size = 50;
   testBall.ballX = 220;  // if ballX == 225, the ball just slides over the right edge
   testBall.ballY = 300;
-  testBall.red = 0;
+  testBall.red = 1000;
   testBall.blue = 0;
   testBall.green = 0;
   testBall.speedX = 0;
@@ -56,19 +55,20 @@ function setup() {
 function createBox() {
   // prepare a box first
   strokeWeight(4);
+  fill(1000,0,0);
   rect(0, 0, BOX_WIDTH, BOX_HEIGHT);
   
   textSize(32);           // size of the text (pixels)
   fill(0, 102, 153);      // fill() takes R,G,B values as the color
   // draw the text in the box (x,y,width,height) with the color in fill()
   textAlign(CENTER);
-  text('Hello World!', BOX_WIDTH/2, BOX_HEIGHT/2);   
+  text('Have a good break!', BOX_WIDTH/2, BOX_HEIGHT/2);   
  
 }
 
 function draw() {
 
-  background(255);
+  background(1000,0,0);
   createBox();
   
   testBallMove();  // a special ball to test corner collision
@@ -110,9 +110,16 @@ class Ball { // Constructor
     this.alpha = 100
     
     // RGB values for color
-    this.red   = random(255);
-    this.green = random(255);
-    this.blue  = random(255)
+    this.colorNum = random(100);
+    if(this.colorNum > 50){
+      this.red   = 1000;
+      this.green = 0;
+    }
+    else{
+      this.green = 1000;
+      this.red = 0;
+    }
+    this.blue  = 0;
   }
   
   display() {
